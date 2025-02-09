@@ -10,11 +10,18 @@
     toggleDone: (task: UpdateableTaskFields) => void;
     toggleEdit: () => void;
     removeTask: (id: number) => void;
+    updateTask: (id: number, task: UpdateableTaskFields) => void;
     edit: Boolean;
   }
 
-  let { edit, tasks, toggleDone, toggleEdit, removeTask }: TaskListProps =
-    $props();
+  let {
+    edit,
+    tasks,
+    toggleDone,
+    toggleEdit,
+    removeTask,
+    updateTask
+  }: TaskListProps = $props();
 </script>
 
 <section>
@@ -54,8 +61,13 @@
             >
           </div>
           <div class="flex-initial">
-            <button onclick={() => removeTask(task.id)} class="outline"
-              >Remove</button
+            <button
+              onclick={() => updateTask(task.id, task)}
+              class="outline text-green-700">Save</button
+            >
+            <button
+              onclick={() => removeTask(task.id)}
+              class="outline text-red-600">Delete</button
             >
           </div>
         {/if}

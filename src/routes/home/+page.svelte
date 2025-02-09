@@ -8,7 +8,7 @@
   let edit = $state(false);
 
   let currentFilter = $state<Filter>("all");
-  // let tasks = $state<Task[]>([]);
+
   let userContext = getUserState();
   let { allTasks } = $derived(userContext);
 
@@ -42,6 +42,10 @@
   const removeTask = async (id: number) => {
     await userContext.deleteTaskFromDB(id);
   };
+
+  const updateTask = async (id: number, task: UpdateableTaskFields) => {
+    await userContext.updateTask(id, task);
+  };
 </script>
 
 {#snippet filterButton(filter: Filter)}
@@ -74,7 +78,14 @@
       {@render filterButton("done")}
     </div>
   {/if}
-  <TasksList {edit} {toggleDone} {toggleEdit} {removeTask} tasks={allTasks} />
+  <TasksList
+    {edit}
+    {toggleDone}
+    {toggleEdit}
+    {removeTask}
+    {updateTask}
+    tasks={filteredTasks}
+  />
 </main>
 
 <style>

@@ -67,6 +67,7 @@ export class UserState {
   };
 
   async deleteTaskFromDB(taskId: number) {
+    console.log(`UserState: deleting task with id: ${taskId}`)
     if (!this.supabase) {
       console.log('UserState: deleteTaskFromDB did not find a db connection')
       return 
@@ -81,6 +82,7 @@ export class UserState {
   }
 
   async updateTask(taskId: number, updateObj: Partial<UpdateableTaskFields>) {
+    console.log(`UserState: updating task with id: ${taskId}`)
     if (!this.supabase) {
       console.log('User State: supabase not connected')
       return
